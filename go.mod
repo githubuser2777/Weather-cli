@@ -1,3 +1,3 @@
-module github.com/githubuser2777/Weather-cli
+module githubuser2777/Weather-cli
 
-go 1.20
+go 1.22
