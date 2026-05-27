@@ -11,7 +11,16 @@ Developers and terminal users who want fast weather updates on Windows and Linux
 
 ## Requirements
 
+### Current State
+v1.0.0.b (MVP) has been successfully shipped, featuring IP geolocation, robust Weather API integration, full multi-day forecasting, and a cross-platform ASCII widget using Nerd Fonts.
+
 ### Validated
+- ✓ Basic CLI interactions — v1.0.0.b
+- ✓ Geolocation integration (ip-api) — v1.0.0.b
+- ✓ Weather data integration (Open-Meteo) — v1.0.0.b
+- ✓ Colored widget display — v1.0.0.b
+- ✓ Multi-day forecasting — v1.0.0.b
+- ✓ Local config persistence — v1.0.0.b
 - Cross-platform compatible (Windows, Linux, macOS).
 - Native Go execution (no external wrappers like Cobra or Viper).
 
