@@ -14,6 +14,7 @@ type DailyForecast struct {
 	MinTemp    float64
 	MaxTemp    float64
 	Conditions string
+	Icon       string
 }
 
 // WeatherData represents current and future weather conditions.
@@ -21,6 +22,7 @@ type WeatherData struct {
 	Temperature float64
 	Humidity    int
 	Conditions  string
+	Icon        string
 	Unit        string
 	Forecast    []DailyForecast
 }
@@ -91,9 +93,6 @@ func FetchWeather(lat, lon float64, unit string, days int) (WeatherData, error) 
 
 	forecastQuery := ""
 	if days > 0 {
-		// +1 because today is included in the daily array, we might want N upcoming days.
-		// Open-Meteo includes today as index 0. If days=3, we fetch 4 to show 3 future days, or just fetch `days` and show them.
-		// Let's fetch `days` and just show whatever it returns.
 		forecastQuery = fmt.Sprintf("&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=%d", days)
 	}
 
@@ -116,20 +115,19 @@ func FetchWeather(lat, lon float64, unit string, days int) (WeatherData, error) 
 	}
 
 	current := weatherResp.Current
-	conditions := decodeWeatherCode(current.WeatherCode)
+	conditions, icon := decodeWeatherCode(current.WeatherCode)
 
 	var forecasts []DailyForecast
 	if days > 0 && len(weatherResp.Daily.Time) > 0 {
-		// Start from index 1 (tomorrow) if we only want future days, or index 0 (today) if we want inclusive.
-		// Let's start from 1 to give a "future" forecast, but only if there are enough elements.
 		startIdx := 1
 		for i := startIdx; i < len(weatherResp.Daily.Time); i++ {
-			fCond := decodeWeatherCode(weatherResp.Daily.WeatherCode[i])
+			fCond, fIcon := decodeWeatherCode(weatherResp.Daily.WeatherCode[i])
 			forecasts = append(forecasts, DailyForecast{
 				Date:       weatherResp.Daily.Time[i],
 				MinTemp:    weatherResp.Daily.Temperature2mMin[i],
 				MaxTemp:    weatherResp.Daily.Temperature2mMax[i],
 				Conditions: fCond,
+				Icon:       fIcon,
 			})
 		}
 	}
@@ -138,39 +136,40 @@ func FetchWeather(lat, lon float64, unit string, days int) (WeatherData, error) 
 		Temperature: current.Temperature2m,
 		Humidity:    current.RelativeHumidity,
 		Conditions:  conditions,
+		Icon:        icon,
 		Unit:        unitSymbol,
 		Forecast:    forecasts,
 	}, nil
 }
 
-// decodeWeatherCode converts WMO weather codes to strings.
-func decodeWeatherCode(code int) string {
+// decodeWeatherCode converts WMO weather codes to strings and Nerd Font icons.
+func decodeWeatherCode(code int) (string, string) {
 	switch {
 	case code == 0:
-		return "Clear sky"
+		return "Clear sky", "󰖙"
 	case code == 1 || code == 2 || code == 3:
-		return "Partly cloudy"
+		return "Partly cloudy", "󰖕"
 	case code == 45 || code == 48:
-		return "Fog"
+		return "Fog", "󰖑"
 	case code >= 51 && code <= 55:
-		return "Drizzle"
+		return "Drizzle", "󰖗"
 	case code >= 56 && code <= 57:
-		return "Freezing Drizzle"
+		return "Freezing Drizzle", "󰖗"
 	case code >= 61 && code <= 65:
-		return "Rain"
+		return "Rain", "󰖖"
 	case code >= 66 && code <= 67:
-		return "Freezing Rain"
+		return "Freezing Rain", "󰖖"
 	case code >= 71 && code <= 75:
-		return "Snow fall"
+		return "Snow fall", "󰖘"
 	case code == 77:
-		return "Snow grains"
+		return "Snow grains", "󰖘"
 	case code >= 80 && code <= 82:
-		return "Rain showers"
+		return "Rain showers", "󰖗"
 	case code >= 85 && code <= 86:
-		return "Snow showers"
+		return "Snow showers", "󰖘"
 	case code >= 95 && code <= 99:
-		return "Thunderstorm"
+		return "Thunderstorm", "󰖓"
 	default:
-		return "Unknown"
+		return "Unknown", "󰖕"
 	}
 }

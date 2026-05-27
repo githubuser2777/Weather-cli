@@ -19,7 +19,7 @@ const (
 	ColorBold   = "\033[1m"
 )
 
-const boxWidth = 48 // Expanded slightly for forecasts
+const boxWidth = 50 // Expanded slightly for better forecast formatting
 
 // PrintError formats and prints error messages to Stderr.
 func PrintError(err error) {
@@ -30,7 +30,7 @@ func PrintError(err error) {
 // For Fahrenheit, it roughly maps equivalent ranges.
 func formatTemp(temp float64, unit string) (string, string) {
 	raw := fmt.Sprintf("%.1f°%s", temp, unit)
-	
+
 	celsiusTemp := temp
 	if unit == "F" {
 		celsiusTemp = (temp - 32) * 5 / 9
@@ -51,8 +51,9 @@ func formatHumidity(hum int) (string, string) {
 }
 
 // formatConditions colorizes the conditions.
-func formatConditions(cond string) (string, string) {
-	return cond, ColorYellow + cond + ColorReset
+func formatConditions(cond string, icon string) (string, string) {
+	raw := fmt.Sprintf("%s %s", icon, cond)
+	return raw, ColorYellow + raw + ColorReset
 }
 
 // printRow prints a padded row for the ASCII widget.
@@ -84,7 +85,7 @@ func RenderWeather(locationName string, data weather.WeatherData) {
 	rawH, colH := formatHumidity(data.Humidity)
 	printRow(" Humidity:    ", rawH, colH)
 
-	rawC, colC := formatConditions(data.Conditions)
+	rawC, colC := formatConditions(data.Conditions, data.Icon)
 	printRow(" Conditions:  ", rawC, colC)
 
 	// Forecast rows
@@ -101,8 +102,21 @@ func RenderWeather(locationName string, data weather.WeatherData) {
 			rawMin, colMin := formatTemp(f.MinTemp, data.Unit)
 			rawMax, colMax := formatTemp(f.MaxTemp, data.Unit)
 
-			rawF := fmt.Sprintf("%s  L:%s H:%s %s", shortDate, rawMin, rawMax, f.Conditions)
-			colF := fmt.Sprintf("%s%s%s  L:%s H:%s %s%s%s", ColorCyan, shortDate, ColorReset, colMin, colMax, ColorYellow, f.Conditions, ColorReset)
+			// Format: "10-02  󰖙 Clear sky" and "L:15.2°C  H:26.5°C"
+			// To ensure clean alignment, we pad the condition section
+			condRaw := fmt.Sprintf("%s %s", f.Icon, f.Conditions)
+			// Pad the condition to fixed 16 runes so Temps align nicely
+			padCond := 16 - utf8.RuneCountInString(condRaw)
+			if padCond < 0 {
+				padCond = 0
+			}
+			condPadded := condRaw + strings.Repeat(" ", padCond)
+
+			rawF := fmt.Sprintf("%s  %s  L:%s  H:%s", shortDate, condPadded, rawMin, rawMax)
+			
+			// Colored parts
+			condCol := ColorYellow + condPadded + ColorReset
+			colF := fmt.Sprintf("%s%s%s  %s  L:%s  H:%s", ColorCyan, shortDate, ColorReset, condCol, colMin, colMax)
 
 			printRow("  ", rawF, colF)
 		}
