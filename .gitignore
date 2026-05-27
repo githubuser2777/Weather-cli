@@ -7,30 +7,41 @@
 
 # Compiled executable for this specific project
 weather-cli
+weather-cli.exe
 
 # Test binary, built with `go test -c`
 *.test
 
 # Output of the go coverage tool
 *.out
+coverage.html
+*.prof
+
+# Go workspace file
+go.work
+go.work.sum
 
 # Environment Variables (Secrets)
 .env
+.env.local
+.env.*
+!.env.example
 
 # OS-specific
 .DS_Store
 Thumbs.db
+ehthumbs.db
 
 # IDEs / Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # Project specific local configs
 /config.json
-~/.weather-cli/
 
-# Get Shit Done agent configs
+# Tooling / Agents
 .agent/
 .obsidian/
