@@ -51,9 +51,8 @@ func formatHumidity(hum int) (string, string) {
 }
 
 // formatConditions colorizes the conditions.
-func formatConditions(cond string, icon string) (string, string) {
-	raw := fmt.Sprintf("%s %s", icon, cond)
-	return raw, ColorYellow + raw + ColorReset
+func formatConditions(cond string) (string, string) {
+	return cond, ColorYellow + cond + ColorReset
 }
 
 // printRow prints a padded row for the ASCII widget.
@@ -85,7 +84,7 @@ func RenderWeather(locationName string, data weather.WeatherData) {
 	rawH, colH := formatHumidity(data.Humidity)
 	printRow(" Humidity:    ", rawH, colH)
 
-	rawC, colC := formatConditions(data.Conditions, data.Icon)
+	rawC, colC := formatConditions(data.Conditions)
 	printRow(" Conditions:  ", rawC, colC)
 
 	// Forecast rows
@@ -102,8 +101,8 @@ func RenderWeather(locationName string, data weather.WeatherData) {
 			rawMin, colMin := formatTemp(f.MinTemp, data.Unit)
 			rawMax, colMax := formatTemp(f.MaxTemp, data.Unit)
 
-			rawF := fmt.Sprintf("%s  L:%s H:%s %s %s", shortDate, rawMin, rawMax, f.Icon, f.Conditions)
-			colF := fmt.Sprintf("%s%s%s  L:%s H:%s %s%s %s%s", ColorCyan, shortDate, ColorReset, colMin, colMax, ColorYellow, f.Icon, f.Conditions, ColorReset)
+			rawF := fmt.Sprintf("%s  L:%s H:%s %s", shortDate, rawMin, rawMax, f.Conditions)
+			colF := fmt.Sprintf("%s%s%s  L:%s H:%s %s%s%s", ColorCyan, shortDate, ColorReset, colMin, colMax, ColorYellow, f.Conditions, ColorReset)
 
 			printRow("  ", rawF, colF)
 		}
