@@ -1,44 +1,127 @@
 # Weather CLI
 
-A robust, cross-platform Command Line Interface (CLI) application for fetching and displaying current weather data, written in Go.
+Weather CLI is a small, cross-platform Go command line tool for checking current weather from the terminal. It can use your IP address to detect a location automatically, or it can fetch weather for a city you provide.
+
+The project uses only the Go standard library and public JSON APIs.
 
 ## Features
 
-- **Auto-Location Detection:** Detects your location automatically via IP if no city is specified.
-- **Accurate Weather Data:** Fetches real-time weather information (temperature, humidity, conditions) from reliable APIs.
-- **Cross-Platform:** Runs seamlessly on both Linux and Windows.
-- **Beautiful Output:** Clean, color-coded, and well-aligned terminal display.
+- Detects your current city and coordinates with IP geolocation when no city is provided.
+- Looks up city coordinates with the Open-Meteo geocoding API.
+- Fetches current temperature, humidity, and weather conditions from Open-Meteo.
+- Supports Celsius and Fahrenheit output.
+- Supports optional multi-day forecasts.
+- Renders a formatted terminal weather panel with ANSI colors.
+- Saves default city and unit preferences in a local JSON config file.
 
-## Getting Started
+## Requirements
 
-### Prerequisites
-- [Go](https://golang.org/doc/install) (1.20+ recommended)
+- Go 1.22 or newer
+- Network access for location, geocoding, and weather API calls
 
-### Installation
+No API key is required for the current Open-Meteo based implementation.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/weather-cli.git
-   cd weather-cli
-   ```
-2. Build the project:
-   ```bash
-   go build -o weather-cli cmd/weather/main.go
-   ```
+## Build
 
-### Configuration
-Set up your API key via an environment variable. Do NOT hardcode secrets!
 ```bash
-export WEATHER_API_KEY="your_api_key_here"
+go build -o weather-cli ./cmd/weather
 ```
-*(Windows users can use `set WEATHER_API_KEY=...` or `$env:WEATHER_API_KEY="..."` in PowerShell)*
+
+On Windows PowerShell:
+
+```powershell
+go build -o weather-cli.exe .\cmd\weather
+```
+
+## Usage
+
+Run with automatic IP-based location detection:
+
+```bash
+./weather-cli
+```
+
+Run for a specific city:
+
+```bash
+./weather-cli --city "London"
+```
+
+Use Fahrenheit:
+
+```bash
+./weather-cli --city "New York" --unit fahrenheit
+```
+
+Show a forecast:
+
+```bash
+./weather-cli --city "Tokyo" --forecast 3
+```
+
+Save your current options as defaults:
+
+```bash
+./weather-cli --city "Paris" --unit celsius --save-config
+```
+
+Show the version:
+
+```bash
+./weather-cli --version
+```
+
+## Flags
+
+| Flag | Description |
+| --- | --- |
+| `--city` | City name to fetch weather for. If omitted, the CLI uses config defaults or IP geolocation. |
+| `--unit` | Temperature unit. Accepted values: `celsius`, `fahrenheit`. |
+| `--forecast` | Number of forecast days to request, from 1 to 7. |
+| `--save-config` | Save the selected city and unit to the local config file. |
+| `--version` | Print the CLI version. |
+
+## Configuration
+
+Saved preferences are stored at:
+
+```text
+~/.weather-cli/config.json
+```
+
+Example:
+
+```json
+{
+  "default_city": "Paris",
+  "unit": "celsius"
+}
+```
+
+Configuration is optional. Without a saved city, Weather CLI attempts IP-based location detection.
+
+## Development
+
+Run all tests:
+
+```bash
+go test ./...
+```
+
+Format Go files:
+
+```bash
+gofmt -w ./cmd ./internal
+```
 
 ## Documentation
+
+- [Getting Started](docs/GETTING-STARTED.md)
+- [Configuration](docs/CONFIGURATION.md)
 - [Development Roadmap](docs/ROADMAP.md)
-- [Features Tracker](docs/features.md)
+- [Features Tracker](docs/FEATURES.md)
 - [Architecture & Design](docs/ARCHITECTURE.md)
+- [Testing](docs/TESTING.md)
+- [Contributing](docs/CONTRIBUTING.md)
 - [Agent Directives](AGENTS.md)
 - [AI Policy Rules](AI_POLICY_RULES.md)
-
-## Contributing
-Please see our [Contributing Guidelines](docs/CONTRIBUTING.md) for details on how to propose changes.
