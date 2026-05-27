@@ -1,17 +1,26 @@
-# Execution Roadmap
+# Roadmap: Weather CLI
 
-## Phase 1: Foundation (MVP)
-Establish the project structure and basic CLI interactions.
-- Status: Complete
+## Milestones
 
-## Phase 2: Core Data Integration
-Connect to external services to fetch real data (IP Geolocation & Weather API).
-- Status: Complete
+- ✅ **v1.0.0.b MVP** — Phases 1-4 (shipped 2026-05-28)
 
-## Phase 3: Presentation & User Experience
-Make the output beautiful and cross-platform compatible with terminal formatting and colors.
-- Status: Complete
+## Phases
 
-## Phase 4: Advanced Features & Polish
-Add convenience features (local config, units, forecasts).
-- Status: Complete
+<details>
+<summary>✅ v1.0.0.b MVP (Phases 1-4) — SHIPPED 2026-05-28</summary>
+
+- [x] Phase 1: Foundation (MVP)
+- [x] Phase 2: Core Data Integration
+- [x] Phase 3: Presentation & User Experience
+- [x] Phase 4: Advanced Features & Polish
+
+</details>
+
+## Progress
+
+| Phase             | Milestone | Status      | Completed  |
+| ----------------- | --------- | ----------- | ---------- |
+| 1. Foundation     | v1.0.0.b  | Complete    | 2026-05-27 |
+| 2. Core Data      | v1.0.0.b  | Complete    | 2026-05-27 |
+| 3. Presentation   | v1.0.0.b  | Complete    | 2026-05-27 |
+| 4. Polish         | v1.0.0.b  | Complete    | 2026-05-28 |
