@@ -45,3 +45,7 @@ ehthumbs.db
 # Tooling / Agents
 .agent/
 .obsidian/
+.planning/config.json
+.planning/codebase/
+.planning/scratch/
+.planning/graphs/
