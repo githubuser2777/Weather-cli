@@ -3,11 +3,10 @@
 This document tracks the capabilities of the CLI application. The AI agent (Antigravity) MUST update this file as new features are implemented.
 
 ## Implemented Features
-*(None yet. Awaiting initial scaffolding.)*
+- [x] Setup initial Go project structure (`cmd/weather/main.go`).
+- [x] Basic CLI argument parsing using the `flag` standard library (e.g., `--help`, `--city`).
 
 ## Work in Progress
-- [ ] Setup initial Go project structure (`cmd/weather/main.go`).
-- [ ] Basic CLI argument parsing using the `flag` standard library (e.g., `--help`, `--city`).
 - [ ] Auto-detect user location via IP address API (e.g., ipapi.co or ipify).
 
 ## Planned Features
