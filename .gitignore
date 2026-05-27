@@ -28,7 +28,7 @@ Thumbs.db
 *.swo
 
 # Project specific local configs
-config.json
+/config.json
 ~/.weather-cli/
 
 # Get Shit Done agent configs
