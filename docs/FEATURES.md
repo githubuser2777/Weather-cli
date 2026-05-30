@@ -17,7 +17,8 @@ This document tracks the capabilities of the CLI application. The AI agent (Anti
 - [x] Dynamically adjust console box-width to prevent layout border wrapping for long city names.
 
 ## Work in Progress
-*(None currently. Ready for new features!)*
+- [ ] **Interactive TUI Dashboard:** Design a real-time console dashboard loop featuring alternate screen rendering, geocoding lookups, and toggles for temperature format & forecasts.
+- [ ] **Interactive Help Screen:** Guide users on command shortcuts, local config, caching directory paths, and exit parameters.
 
 ## Planned Features
 *(None currently. Ready for new features!)*
