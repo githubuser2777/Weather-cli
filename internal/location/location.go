@@ -26,10 +26,12 @@ type IPApiResponse struct {
 	Message     string  `json:"message"`
 }
 
+var apiURL = "http://ip-api.com/json/"
+
 // DetectLocation uses ip-api.com to detect the user's location based on their IP address.
 func DetectLocation() (Location, error) {
 	client := &http.Client{Timeout: 5 * time.Second}
-	resp, err := client.Get("http://ip-api.com/json/")
+	resp, err := client.Get(apiURL)
 	if err != nil {
 		return Location{}, fmt.Errorf("failed to fetch IP geolocation: %w", err)
 	}

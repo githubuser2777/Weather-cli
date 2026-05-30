@@ -19,7 +19,7 @@ const (
 	ColorBold   = "\033[1m"
 )
 
-const boxWidth = 50 // Expanded slightly for better forecast formatting
+var boxWidth = 50 // Default baseline width, can be expanded dynamically
 
 // PrintError formats and prints error messages to Stderr.
 func PrintError(err error) {
@@ -68,6 +68,39 @@ func printRow(label, rawValue, coloredValue string) {
 
 // RenderWeather prints the weather data and forecast inside a beautiful ASCII widget.
 func RenderWeather(locationName string, data weather.WeatherData) {
+	// Dynamically calculate box width based on inputs
+	width := 50
+
+	// Check location header length
+	headerLen := utf8.RuneCountInString(" Weather for: ") + utf8.RuneCountInString(locationName)
+	if headerLen > width {
+		width = headerLen
+	}
+
+	// Check forecast rows if any
+	for _, f := range data.Forecast {
+		shortDate := f.Date
+		if len(shortDate) >= 5 {
+			shortDate = shortDate[5:]
+		}
+		rawMin, _ := formatTemp(f.MinTemp, data.Unit)
+		rawMax, _ := formatTemp(f.MaxTemp, data.Unit)
+		condRaw := fmt.Sprintf("%s %s", f.Icon, f.Conditions)
+		padCond := 16 - utf8.RuneCountInString(condRaw)
+		if padCond < 0 {
+			padCond = 0
+		}
+		condPadded := condRaw + strings.Repeat(" ", padCond)
+		rawF := fmt.Sprintf("%s  %s  L:%s  H:%s", shortDate, condPadded, rawMin, rawMax)
+
+		rowLen := utf8.RuneCountInString("  ") + utf8.RuneCountInString(rawF)
+		if rowLen > width {
+			width = rowLen
+		}
+	}
+
+	boxWidth = width
+
 	fmt.Println()
 	fmt.Printf("╭%s╮\n", strings.Repeat("─", boxWidth+2))
 

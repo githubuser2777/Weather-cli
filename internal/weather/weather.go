@@ -8,6 +8,10 @@ import (
 	"time"
 )
 
+var geocodeBaseURL = "https://geocoding-api.open-meteo.com"
+var weatherBaseURL = "https://api.open-meteo.com"
+
+
 // DailyForecast represents the forecast for a single day.
 type DailyForecast struct {
 	Date       string
@@ -54,7 +58,7 @@ type WeatherResponse struct {
 
 // GeocodeCity converts a city name into coordinates using Open-Meteo Geocoding API.
 func GeocodeCity(city string) (float64, float64, string, error) {
-	apiURL := fmt.Sprintf("https://geocoding-api.open-meteo.com/v1/search?name=%s&count=1&language=en&format=json", url.QueryEscape(city))
+	apiURL := fmt.Sprintf("%s/v1/search?name=%s&count=1&language=en&format=json", geocodeBaseURL, url.QueryEscape(city))
 
 	client := &http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Get(apiURL)
@@ -96,7 +100,7 @@ func FetchWeather(lat, lon float64, unit string, days int) (WeatherData, error) 
 		forecastQuery = fmt.Sprintf("&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=%d", days)
 	}
 
-	apiURL := fmt.Sprintf("https://api.open-meteo.com/v1/forecast?latitude=%f&longitude=%f&current=temperature_2m,relative_humidity_2m,weather_code%s%s", lat, lon, tempUnit, forecastQuery)
+	apiURL := fmt.Sprintf("%s/v1/forecast?latitude=%f&longitude=%f&current=temperature_2m,relative_humidity_2m,weather_code%s%s", weatherBaseURL, lat, lon, tempUnit, forecastQuery)
 
 	client := &http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Get(apiURL)
