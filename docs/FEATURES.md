@@ -15,10 +15,11 @@ This document tracks the capabilities of the CLI application. The AI agent (Anti
 - [x] Support multiple units (Celsius/Fahrenheit) via flag (e.g., `--unit C`).
 - [x] Add offline-first unit tests for core packages (`weather`, `display`, `location`, `config`) mocking HTTP integrations.
 - [x] Dynamically adjust console box-width to prevent layout border wrapping for long city names.
+- [x] **Interactive TUI Dashboard:** Real-time console dashboard loop featuring alternate screen rendering, geocoding lookups, and toggles for temperature format & forecasts (triggered via `--tui` / `-t` flag).
+- [x] **Interactive Help Screen:** Guide users on command shortcuts, local config, caching directory paths, and exit parameters.
 
 ## Work in Progress
-- [ ] **Interactive TUI Dashboard:** Design a real-time console dashboard loop featuring alternate screen rendering, geocoding lookups, and toggles for temperature format & forecasts.
-- [ ] **Interactive Help Screen:** Guide users on command shortcuts, local config, caching directory paths, and exit parameters.
+*(None currently. Ready for new features!)*
 
 ## Planned Features
 *(None currently. Ready for new features!)*

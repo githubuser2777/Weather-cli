@@ -1,5 +1,17 @@
 # Milestones
 
+## v1.2.0 Interactive Terminal User Interface (Shipped: 2026-05-30)
+
+**Phases completed:** 3 phases, 2 plans, 16 tasks
+
+**Key accomplishments:**
+
+- Established a robust local unit testing suite and dynamically responsive console layout.
+- Built a weather query caching system and added terminal-based configuration view/set options.
+- Built an interactive standard-library terminal user interface (TUI) dashboard with guidance help support.
+
+---
+
 ## v1.1.0 Cache and Configuration Polish (Shipped: 2026-05-30)
 
 **Phases completed:** 2 phases, 2 plans, 11 tasks

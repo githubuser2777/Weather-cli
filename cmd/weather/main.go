@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 
+	"githubuser2777/Weather-cli/internal/cli"
 	"githubuser2777/Weather-cli/internal/config"
 	"githubuser2777/Weather-cli/internal/display"
 	"githubuser2777/Weather-cli/internal/location"
@@ -22,6 +23,7 @@ func main() {
 	configShowFlag := flag.Bool("config-show", false, "Show current default configuration settings")
 	configSetFlag := flag.String("config-set", "", "Set a default preference key=value (e.g. city=Hanoi, unit=celsius)")
 	forceFlag := flag.Bool("force", false, "Force fetch weather data, bypassing local cache")
+	tuiFlag := flag.Bool("tui", false, "Start Weather CLI in interactive TUI mode")
 
 	flag.Parse()
 
@@ -35,6 +37,11 @@ func main() {
 	if err != nil {
 		display.PrintError(fmt.Errorf("failed to load config: %v", err))
 		// Non-fatal, continue with defaults
+	}
+
+	if *tuiFlag {
+		cli.StartTUI(cfg)
+		os.Exit(0)
 	}
 
 	if *configShowFlag {

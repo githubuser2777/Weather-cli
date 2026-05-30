@@ -41,13 +41,13 @@ This document outlines the phased development plan for the Weather CLI project. 
 
 ---
 
-## 🔵 Phase 5: Interactive Terminal User Interface (TUI) [IN PROGRESS]
+## 🟢 Phase 5: Interactive Terminal User Interface (TUI) [COMPLETE]
 **Goal:** Create a real-time console dashboard with interactive settings.
 
-- [ ] **Interactive Input Processing:** Read console inputs in raw or line-buffered mode to execute dynamic key commands.
-- [ ] **ANSI Dashboard Redrawing:** Use escape codes to clear screen and redeliver beautiful layouts on city, unit, and forecast changes.
-- [ ] **Console Help Screen:** Implement an interactive page mapping commands and explaining caching and config storage.
-- [ ] **Graceful Program Exit:** Support clean termination on quit key presses.
+- [x] **Interactive Input Processing:** Read console inputs in raw or line-buffered mode to execute dynamic key commands.
+- [x] **ANSI Dashboard Redrawing:** Use escape codes to clear screen and redeliver beautiful layouts on city, unit, and forecast changes.
+- [x] **Console Help Screen:** Implement an interactive page mapping commands and explaining caching and config storage.
+- [x] **Graceful Program Exit:** Support clean termination on quit key presses.
 
 ---
 
