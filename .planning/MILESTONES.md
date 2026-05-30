@@ -1,5 +1,16 @@
 # Milestones
 
+## v1.1.0 Cache and Configuration Polish (Shipped: 2026-05-30)
+
+**Phases completed:** 2 phases, 2 plans, 11 tasks
+
+**Key accomplishments:**
+
+- Established a robust local unit testing suite and dynamically responsive console layout.
+- Built a weather query caching system and added terminal-based configuration view/set options.
+
+---
+
 ## v1.0.0 Unit Testing and Robustness (Shipped: 2026-05-30)
 
 **Phases completed:** 1 phases, 1 plans, 6 tasks
