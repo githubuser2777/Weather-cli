@@ -1,5 +1,7 @@
 # Weather CLI
 
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 Weather CLI is a small, cross-platform Go command line tool for checking current weather from the terminal. It can use your IP address to detect a location automatically, or it can fetch weather for a city you provide.
 
 The project uses only the Go standard library and public JSON APIs.
@@ -125,3 +127,7 @@ gofmt -w ./cmd ./internal
 - [Contributing](docs/CONTRIBUTING.md)
 - [Agent Directives](AGENTS.md)
 - [AI Policy Rules](AI_POLICY_RULES.md)
+
+## License
+
+This project is licensed under the Apache License, Version 2.0 (Apache-2.0). See [`LICENSE`](LICENSE) for details.
