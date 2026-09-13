@@ -3,7 +3,7 @@ package config
 import (
 	"testing"
 
-	"githubuser2777/Weather-cli/internal/weather"
+	"github.com/ViolaPeracia/Weather-cli/internal/weather"
 )
 
 func TestCacheSaveAndLoadSuccess(t *testing.T) {

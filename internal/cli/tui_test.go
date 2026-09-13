@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"githubuser2777/Weather-cli/internal/config"
+	"github.com/ViolaPeracia/Weather-cli/internal/config"
 )
 
 func TestTuiQuitCommand(t *testing.T) {

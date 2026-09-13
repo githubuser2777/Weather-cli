@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"githubuser2777/Weather-cli/internal/weather"
+	"github.com/ViolaPeracia/Weather-cli/internal/weather"
 )
 
 const (

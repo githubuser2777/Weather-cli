@@ -7,7 +7,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"githubuser2777/Weather-cli/internal/weather"
+	"github.com/ViolaPeracia/Weather-cli/internal/weather"
 )
 
 func TestFormatTempCelsius(t *testing.T) {

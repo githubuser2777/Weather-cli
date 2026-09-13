@@ -6,11 +6,11 @@ import (
 	"os"
 	"strings"
 
-	"githubuser2777/Weather-cli/internal/cli"
-	"githubuser2777/Weather-cli/internal/config"
-	"githubuser2777/Weather-cli/internal/display"
-	"githubuser2777/Weather-cli/internal/location"
-	"githubuser2777/Weather-cli/internal/weather"
+	"github.com/ViolaPeracia/Weather-cli/internal/cli"
+	"github.com/ViolaPeracia/Weather-cli/internal/config"
+	"github.com/ViolaPeracia/Weather-cli/internal/display"
+	"github.com/ViolaPeracia/Weather-cli/internal/location"
+	"github.com/ViolaPeracia/Weather-cli/internal/weather"
 )
 
 func main() {

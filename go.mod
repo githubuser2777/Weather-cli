@@ -1,3 +1,3 @@
-module githubuser2777/Weather-cli
+module github.com/ViolaPeracia/Weather-cli
 
 go 1.22

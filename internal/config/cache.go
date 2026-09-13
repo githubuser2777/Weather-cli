@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"githubuser2777/Weather-cli/internal/weather"
+	"github.com/ViolaPeracia/Weather-cli/internal/weather"
 )
 
 // CacheEntry represents the structure of the cached weather data.
